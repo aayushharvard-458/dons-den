@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f2f7ff">
+<meta name="apple-mobile-web-app-title" content="Don's Den">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" href="icon.png">
+<title>Don's Den</title>
+</head>
+<body style="margin:0;background:#f2f7ff;color:#5f7390;font:600 17px/1.5 system-ui,sans-serif">
+<p id="msg" style="text-align:center;padding:42vh 16px 0">Opening Don's Den…</p>
+<script>
+var API = 'https://script.google.com/macros/s/AKfycbxYufA7ITQ4MmGyOWPnZ3U5H4AzVCKkQTfW-WtO2DnO357czZHHh8s_Mko6JeBK-LxbpA/exec';
+fetch(API + '?page=1', { credentials: 'omit' }).then(function (r) {
+  if (!r.ok) throw new Error(r.status);
+  return r.text();
+}).then(function (html) {
+  html = html.replace('<head>', '<head><script>window.DD_API = ' + JSON.stringify(API) + ';<\/script>');
+  html = html.replace('icon-180.png', 'icon.png').replace('icon-180.png', 'icon.png').replace('<link rel="manifest" href="manifest.webmanifest">', '');
+  document.open(); document.write(html); document.close();
+}).catch(function () {
+  document.getElementById('msg').textContent = "Couldn't open Don's Den. Check your internet and reload the page.";
+});
+</script>
+</body>
+</html>
